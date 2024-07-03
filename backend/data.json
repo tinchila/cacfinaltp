@@ -1,0 +1,10 @@
+[
+{"id": 1, "bebida": "Whisky", "marca": "Jack Daniels", "variedad": "N° 7", "precio": 40000, "imagen": "img/WhiskyJackDaniels.png", "cantidad": 1},
+{"id": 2, "bebida": "Whisky", "marca": "Jhonnie Walker", "variedad": "Red", "precio": 15000, "imagen": "img/WhiskyJhonnieWalkerRed.png", "cantidad": 1},
+{"id": 3, "bebida": "Whisky", "marca": "Jhonnie Walker", "variedad": "Black", "precio": 15000, "imagen": "img/WhiskyJhonnieWalkerBlack.png", "cantidad": 1},
+{"id": 4, "bebida": "Gin", "marca": "Tanqueray", "variedad": "Original", "precio": 15000, "imagen": "img/GinTanquerayOriginal.png", "cantidad": 1},
+{"id": 5, "bebida": "Gin", "marca": "Bombay", "variedad": "Shapire", "precio": 13000, "imagen": "img/GinBombayShapire.png", "cantidad": 1},
+{"id": 6, "bebida": "Gancia", "marca": "Americano", "variedad": "Original", "precio": 15000, "imagen": "img/GanciaAmericanoOriginal.png", "cantidad": 1},
+{"id": 7, "bebida": "Fernet" , "marca": "Branca" , "variedad": "Original", "precio": 15000, "imagen": "img/FernetBrancaOriginal.png", "cantidad": 1},
+{"id": 8, "bebida": "Vodka" , "marca": "Absolut" , "variedad": "Original", "precio": 15000, "imagen": "img/VodkaAbsolutOriginal.png", "cantidad": 1}
+]
