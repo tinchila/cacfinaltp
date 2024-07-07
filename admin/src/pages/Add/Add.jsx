@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import './Add.css'
 
 const Add = ({ url }) => {
     const [data, setData] = useState({
@@ -29,7 +30,7 @@ const Add = ({ url }) => {
             formData.append('marca', data.marca);
             formData.append('variedad', data.variedad);
             formData.append('precio', data.precio);
-            formData.append('imagen', data.imagen);  // Asegúrate de que data.imagen sea un archivo válido
+            formData.append('imagen', data.imagen);
             formData.append('cantidad', data.cantidad);
 
             const config = {
@@ -64,7 +65,7 @@ const Add = ({ url }) => {
                 <div className="add-img-upload flex-col">
                     <p>Upload Image</p>
                     <label htmlFor="image">
-                        <img src={data.imagen ? URL.createObjectURL(data.imagen) : '/default-image.jpg'} alt="" />
+                        <img src={data.imagen ? URL.createObjectURL(data.imagen) : '/upload_area.png'} alt="" />
                     </label>
                     <input onChange={onFileChangeHandler} type="file" id="image" hidden required />
                 </div>

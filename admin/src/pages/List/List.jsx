@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import './List.css'
 
 const List = ({ url }) => {
     const [list, setList] = useState([]);
@@ -24,7 +25,7 @@ const List = ({ url }) => {
             const response = await axios.delete(`${url}/api/bebidas/${id}`);
             if (response.status === 200) {
                 toast.success("Bebida eliminada correctamente");
-                fetchList(); // Actualizar la lista después de eliminar
+                fetchList();
             } else {
                 toast.error("Error al eliminar la bebida");
             }
@@ -53,7 +54,7 @@ const List = ({ url }) => {
                 </div>
                 {list.map((item, index) => (
                     <div key={index} className='list-table-format'>
-                        <img src={`${url}/images/${item.imagen}`} alt="" />
+                        <img src={`${item.imagen}`} alt="" />
                         <p>{item.bebida}</p>
                         <p>{item.marca}</p>
                         <p>{item.variedad}</p>

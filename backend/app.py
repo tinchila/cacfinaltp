@@ -30,20 +30,18 @@ def get_bebidas():
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM bebidas')
     data = cur.fetchall()
-    cur.close()
-    
     bebidas = []
-    for bebida in data:
+    for row in data:
         bebidas.append({
-            'id': bebida[0],
-            'bebida': bebida[1],
-            'marca': bebida[2],
-            'variedad': bebida[3],
-            'precio': bebida[4],
-            'imagen': f"{request.url_root}path_to_save_images/{bebida[5]}",
-            'cantidad': bebida[6]
+            'id': row[0],
+            'bebida': row[1],
+            'marca': row[2],
+            'variedad': row[3],
+            'precio': row[4],
+            'imagen': f"{request.host_url}{app.config['UPLOAD_FOLDER']}/{row[5]}",
+            'cantidad': row[6]
         })
-    
+    cur.close()
     return jsonify(bebidas)
 
 # Ruta Crear una nueva bebida
@@ -65,6 +63,7 @@ def add_bebida():
     mysql.connection.commit()
     cur.close()
     return jsonify({'message': 'Bebida creada'}), 201
+
 
 # Ruta Actualizar una bebida existente
 @app.route('/api/bebidas/<int:id>', methods=['PUT'])
