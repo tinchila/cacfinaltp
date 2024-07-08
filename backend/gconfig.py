@@ -1,5 +1,7 @@
 import os
+import sys
 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 workers = int(os.environ.get("GUNICORN_PROCESSES", "1"))
 threads = int(os.environ.get("GUNICORN_THREADS", "1"))
