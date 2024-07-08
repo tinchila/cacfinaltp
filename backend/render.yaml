@@ -1,20 +1,19 @@
 databases:
   - name: "cac-trabajofinal"
     plan: free
-    databaseName: sample_s9qf
-    user: sample_s9qf_user
-
+    databaseName: bebidas
+    user: bebidas_user
 services:
   - type: web
     plan: free
-    name: flask-sample
+    name: cac-trabajofinal
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn --config src/gconfig.py 'src.app:app'"
+    startCommand: "gunicorn --config backend/gconfig.py 'backend.app:app'"
     envVars:
       - key: GUNICORN_BIND
         value: "0.0.0.0:8000"
       - key: DB_URL
         fromDatabase:
-          name: "flask-sample"
+          name: "cac-trabajofinal"
           property: connectionString
