@@ -2,13 +2,26 @@ from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_mysqldb import MySQL
 from flask_cors import CORS
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'sistema'
+env = os.getenv('FLASK_ENV')
+
+if env == 'production':
+    app.config['MYSQL_HOST'] = os.getenv('PROD_MYSQL_HOST')
+    app.config['MYSQL_USER'] = os.getenv('PROD_MYSQL_USER')
+    app.config['MYSQL_PASSWORD'] = os.getenv('PROD_MYSQL_PASSWORD')
+    app.config['MYSQL_DB'] = os.getenv('PROD_MYSQL_DB')
+else:
+    app.config['MYSQL_HOST'] = os.getenv('LOCAL_MYSQL_HOST')
+    app.config['MYSQL_USER'] = os.getenv('LOCAL_MYSQL_USER')
+    app.config['MYSQL_PASSWORD'] = os.getenv('LOCAL_MYSQL_PASSWORD')
+    app.config['MYSQL_DB'] = os.getenv('LOCAL_MYSQL_DB')
+
+mysql = MySQL(app)
 
 # Guardar imágenes subidas
 UPLOAD_FOLDER = 'path_to_save_images'
