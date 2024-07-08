@@ -1,8 +1,8 @@
 databases:
   - name: "cac-trabajofinal"
     plan: free
-    databaseName: sample_s9qf
-    user: sample_s9qf_user
+    databaseName: bebidas
+    user: bebidas_user
 
 services:
   - type: web
