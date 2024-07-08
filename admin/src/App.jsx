@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 
-  const url = "http://localhost:5000";
+  const url = "https://cac-trabajofinal.onrender.com";
 
   return (
     <div>

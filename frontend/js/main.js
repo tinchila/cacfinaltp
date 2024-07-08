@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Función para obtener productos desde el backend
     const obtenerProductos = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/bebidas");
+        const response = await fetch("https://cac-trabajofinal.onrender.com/api/bebidas");
         const data = await response.json();
         return data.map((producto) => {
           return {
