@@ -17,4 +17,4 @@ services:
         fromDatabase:
           name: "cac-trabajofinal"
           property: connectionString
-    pythonVersion: "3.12.4"
+    pythonVersion: "3.11.9"
