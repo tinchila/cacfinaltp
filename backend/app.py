@@ -74,15 +74,22 @@ def add_bebida():
         imagen_filename = imagen.filename
         imagen.save(os.path.join(app.config['UPLOAD_FOLDER'], imagen_filename))
 
-        with DbSession(app.config['SQLALCHEMY_DATABASE_URI']) as db:
-            db.execute('INSERT INTO bebidas (bebida, marca, variedad, precio, imagen, cantidad) VALUES (%s, %s, %s, %s, %s, %s)', 
-                        (bebida, marca, variedad, precio, imagen_filename, cantidad))
-            db.commit()
+        # Crear una instancia de la sesión de base de datos
+        db = DbSession(app.config['SQLALCHEMY_DATABASE_URI'])
+        db.create_cursor()  # Crear el cursor para ejecutar consultas
+
+        # Ejecutar la inserción en la base de datos
+        db.execute('INSERT INTO bebidas (bebida, marca, variedad, precio, imagen, cantidad) VALUES (%s, %s, %s, %s, %s, %s)', 
+                    (bebida, marca, variedad, precio, imagen_filename, cantidad))
+        db.commit()
+
+        db.close()  # Cerrar la conexión
 
         return jsonify({'message': 'Bebida creada'}), 201
     except Exception as e:
         logging.error(f"Error al crear bebida: {e}")
         return jsonify({'message': 'Error al crear bebida'}), 500
+
 
 # Ruta Actualizar una bebida existente
 @app.route('/api/bebidas/<int:id>', methods=['PUT'])
