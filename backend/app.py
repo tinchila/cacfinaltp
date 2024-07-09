@@ -15,9 +15,9 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 env = os.getenv('FLASK_ENV')
 
 # Configuración para producción y desarrollo
-if env == 'production':
+if env == 'development':
     # Configuración de la base de datos PostgreSQL en Render
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('PROD_DATABASE_URL')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 else:
     # Configuración de la base de datos local MySQL (si es necesario)
     app.config['MYSQL_HOST'] = os.getenv('LOCAL_MYSQL_HOST')
