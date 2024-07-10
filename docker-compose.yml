@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./admin:/app
+    environment:
+      - NODE_ENV=development
+    command: bash -c "npm install && npm run dev"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    command: ["gunicorn", "--config", "gconfig.py", "app:app"]
+    environment:
+      - FLASK_ENV=development
+      - MYSQL_HOST=your_mysql_host
+      - MYSQL_USER=your_mysql_user
+      - MYSQL_PASSWORD=your_mysql_password
+      - MYSQL_DB=your_mysql_db
+      - POSTGRES_DB=your_postgres_db
+      - POSTGRES_USER=your_postgres_user
+      - POSTGRES_PASSWORD=your_postgres_password
+      - PROD_DATABASE_URL=postgres://your_postgres_user:your_postgres_password@db:5432/your_postgres_db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+
+networks:
+  default:
+    driver: bridge
