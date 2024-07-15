@@ -1,7 +1,9 @@
+{/*Crear BD*/}
 CREATE DATABASE sistema;
 
 USE sistema;
 
+{/*Crear Tablas BD*/}
 CREATE TABLE bebidas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     bebida VARCHAR(255) NOT NULL,
@@ -12,6 +14,7 @@ CREATE TABLE bebidas (
     cantidad INT NOT NULL
 );
 
+{/*Insertados Datos DB*/}
 INSERT INTO bebidas (id, bebida, marca, variedad, precio, imagen, cantidad)
 VALUES 
     (1, 'Whisky', 'Jack Daniels', 'N° 7', 40000, 'img/WhiskyJackDaniels.png', 100),
