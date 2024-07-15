@@ -5,26 +5,29 @@ import os
 
 app = Flask(__name__)
 CORS(app)
+
+# Configuración de la conexión a la base de datos MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_PASSWORD'] = '123456789'
 app.config['MYSQL_DB'] = 'sistema'
 
-# Guardar imágenes subidas
+# Inicialización de la extensión MySQL
+mysql = MySQL(app)
+
+# Directorio donde se guardarán las imágenes subidas
 UPLOAD_FOLDER = 'path_to_save_images'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-mysql = MySQL(app)
-
 # Ruta para servir archivos estáticos
 @app.route('/path_to_save_images/<path:filename>')
 def serve_image(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-# Ruta Obtener todas las bebidas
+# Ruta para obtener todas las bebidas
 @app.route('/api/bebidas', methods=['GET'])
 def get_bebidas():
     cur = mysql.connection.cursor()
@@ -44,7 +47,7 @@ def get_bebidas():
     cur.close()
     return jsonify(bebidas)
 
-# Ruta Crear una nueva bebida
+# Ruta para crear una nueva bebida
 @app.route('/api/bebidas', methods=['POST'])
 def add_bebida():
     bebida = request.form['bebida']
@@ -64,8 +67,7 @@ def add_bebida():
     cur.close()
     return jsonify({'message': 'Bebida creada'}), 201
 
-
-# Ruta Actualizar una bebida existente
+# Ruta para actualizar una bebida existente
 @app.route('/api/bebidas/<int:id>', methods=['PUT'])
 def update_bebida(id):
     bebida = request.form['bebida']
@@ -85,7 +87,7 @@ def update_bebida(id):
     cur.close()
     return jsonify({'message': 'Bebida actualizada'}), 200
 
-#Ruta Borrar una bebida
+# Ruta para borrar una bebida
 @app.route('/api/bebidas/<int:id>', methods=['DELETE'])
 def delete_bebida(id):
     cur = mysql.connection.cursor()
